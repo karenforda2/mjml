@@ -1,5 +1,4 @@
-import forEach from 'lodash/forEach'
-import map from 'lodash/map'
+import { forEach, map } from 'lodash'
 
 // eslint-disable-next-line import/prefer-default-export
 export function buildFontsTags(content, inlineStyle, fonts = {}) {
@@ -9,7 +8,7 @@ export function buildFontsTags(content, inlineStyle, fonts = {}) {
     const regex = new RegExp(`"[^"]*font-family:[^"]*${name}[^"]*"`, 'gmi')
     const inlineRegex = new RegExp(`font-family:[^;}]*${name}`, 'gmi')
 
-    if (content.match(regex) || inlineStyle.some(s => s.match(inlineRegex))) {
+    if (content.match(regex) || inlineStyle.some((s) => s.match(inlineRegex))) {
       toImport.push(url)
     }
   })
@@ -19,10 +18,10 @@ export function buildFontsTags(content, inlineStyle, fonts = {}) {
       <!--[if !mso]><!-->
         ${map(
           toImport,
-          url => `<link href="${url}" rel="stylesheet" type="text/css">`,
+          (url) => `<link href="${url}" rel="stylesheet" type="text/css">`,
         ).join('\n')}
         <style type="text/css">
-          ${map(toImport, url => `@import url(${url});`).join('\n')}
+          ${map(toImport, (url) => `@import url(${url});`).join('\n')}
         </style>
       <!--<![endif]-->\n
     `

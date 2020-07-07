@@ -8,7 +8,7 @@ const SKIP_ELEMENTS = ['mjml']
 export const formatValidationError = ruleError
 
 export { rulesCollection, registerRule }
-export dependencies, { registerDependencies } from './dependencies'
+export { default as dependencies, registerDependencies } from './dependencies'
 
 export default function MJMLValidator(element, options = {}) {
   const { children, tagName } = element
@@ -20,7 +20,7 @@ export default function MJMLValidator(element, options = {}) {
     errors = flatten(
       concat(
         errors,
-        ...values(rulesCollection).map(rule =>
+        ...values(rulesCollection).map((rule) =>
           rule(element, {
             skipElements,
             ...options,
@@ -32,7 +32,7 @@ export default function MJMLValidator(element, options = {}) {
 
   if (children && children.length > 0) {
     errors = flatten(
-      concat(errors, ...children.map(child => MJMLValidator(child, options))),
+      concat(errors, ...children.map((child) => MJMLValidator(child, options))),
     )
   }
 

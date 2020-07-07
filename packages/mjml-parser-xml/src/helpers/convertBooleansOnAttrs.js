@@ -1,4 +1,4 @@
-import mapValues from 'lodash/mapValues'
+import { mapValues } from 'lodash'
 
 /**
  * Convert "true" and "false" string attributes values
@@ -6,7 +6,7 @@ import mapValues from 'lodash/mapValues'
  */
 
 export default function convertBooleansOnAttrs(attrs) {
-  return mapValues(attrs, val => {
+  return mapValues(attrs, (val) => {
     if (val === 'true') {
       return true
     }

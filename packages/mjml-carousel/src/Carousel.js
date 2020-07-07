@@ -1,8 +1,5 @@
 import { BodyComponent } from 'mjml-core'
-import range from 'lodash/range'
-import repeat from 'lodash/repeat'
-import min from 'lodash/min'
-import map from 'lodash/map'
+import { range, repeat, min, map } from 'lodash'
 import crypto from 'crypto'
 
 import { msoConditionalTag } from 'mjml-core/lib/helpers/conditionalTag'
@@ -46,7 +43,7 @@ export default class MjCarousel extends BodyComponent {
   }
 
   componentHeadStyle = () => {
-    const length = this.props.children.length
+    const { length } = this.props.children
     const { carouselId } = this
 
     if (!length) return ''
@@ -77,7 +74,7 @@ export default class MjCarousel extends BodyComponent {
 
     ${range(0, length)
       .map(
-        i =>
+        (i) =>
           `.mj-carousel-${carouselId}-radio:checked ${repeat(
             '+ * ',
             i,
@@ -89,7 +86,7 @@ export default class MjCarousel extends BodyComponent {
 
     ${range(0, length)
       .map(
-        i =>
+        (i) =>
           `.mj-carousel-${carouselId}-radio-${i + 1}:checked ${repeat(
             '+ * ',
             length - i - 1,
@@ -102,38 +99,35 @@ export default class MjCarousel extends BodyComponent {
     .mj-carousel-previous-icons,
     .mj-carousel-next-icons,
     ${range(0, length).map(
-      i =>
+      (i) =>
         `.mj-carousel-${carouselId}-radio-${i + 1}:checked ${repeat(
           '+ * ',
           length - i - 1,
-        )}+ .mj-carousel-content .mj-carousel-next-${((i +
-          (1 % length) +
-          length) %
-          length) +
-          1}`,
+        )}+ .mj-carousel-content .mj-carousel-next-${
+          ((i + (1 % length) + length) % length) + 1
+        }`,
     )},
     ${range(0, length).map(
-      i =>
+      (i) =>
         `.mj-carousel-${carouselId}-radio-${i + 1}:checked ${repeat(
           '+ * ',
           length - i - 1,
-        )}+ .mj-carousel-content .mj-carousel-previous-${((i -
-          (1 % length) +
-          length) %
-          length) +
-          1}`,
+        )}+ .mj-carousel-content .mj-carousel-previous-${
+          ((i - (1 % length) + length) % length) + 1
+        }`,
     )} {
       display: block !important;
     }
 
     ${range(0, length)
       .map(
-        i =>
+        (i) =>
           `.mj-carousel-${carouselId}-radio-${i + 1}:checked ${repeat(
             '+ * ',
             length - i - 1,
-          )}+ .mj-carousel-content .mj-carousel-${carouselId}-thumbnail-${i +
-            1}`,
+          )}+ .mj-carousel-content .mj-carousel-${carouselId}-thumbnail-${
+            i + 1
+          }`,
       )
       .join(',')} {
       border-color: ${this.getAttribute('tb-selected-border-color')} !important;
@@ -146,7 +140,7 @@ export default class MjCarousel extends BodyComponent {
 
     ${range(0, length)
       .map(
-        i =>
+        (i) =>
           `.mj-carousel-${carouselId}-thumbnail:hover ${repeat(
             '+ * ',
             length - i - 1,
@@ -162,7 +156,7 @@ export default class MjCarousel extends BodyComponent {
 
     ${range(0, length)
       .map(
-        i =>
+        (i) =>
           `.mj-carousel-${carouselId}-thumbnail-${i + 1}:hover ${repeat(
             '+ * ',
             length - i - 1,
@@ -201,7 +195,6 @@ export default class MjCarousel extends BodyComponent {
   }
 
   getStyles() {
-    // eslint-disable-line class-methods-use-this
     return {
       carousel: {
         div: {
@@ -257,7 +250,7 @@ export default class MjCarousel extends BodyComponent {
 
   generateRadios() {
     return this.renderChildren(this.props.children, {
-      renderer: component => component.renderRadio(),
+      renderer: (component) => component.renderRadio(),
       attributes: {
         carouselId: this.carouselId,
       },
@@ -274,7 +267,7 @@ export default class MjCarousel extends BodyComponent {
         'tb-width': this.thumbnailsWidth(),
         carouselId: this.carouselId,
       },
-      renderer: component => component.renderThumbnail(),
+      renderer: (component) => component.renderThumbnail(),
     })
   }
 
@@ -296,7 +289,7 @@ export default class MjCarousel extends BodyComponent {
         >
           ${range(1, this.props.children.length + 1)
             .map(
-              i => `
+              (i) => `
               <label
                 ${this.htmlAttributes({
                   for: `mj-carousel-${this.carouselId}-radio-${i}`,

@@ -1,7 +1,4 @@
-import concat from 'lodash/concat'
-import keys from 'lodash/keys'
-import includes from 'lodash/includes'
-import filter from 'lodash/filter'
+import { concat, keys, includes, filter } from 'lodash'
 
 import ruleError from './ruleError'
 
@@ -22,7 +19,7 @@ export default function validateAttribute(element, { components }) {
   )
   const unknownAttributes = filter(
     keys(attributes),
-    attribute => !includes(availableAttributes, attribute),
+    (attribute) => !includes(availableAttributes, attribute),
   )
 
   if (unknownAttributes.length === 0) {

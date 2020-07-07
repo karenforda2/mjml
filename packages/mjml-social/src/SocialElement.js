@@ -10,7 +10,7 @@ const defaultSocialNetworks = {
     src: `${IMG_BASE_URL}facebook.png`,
   },
   twitter: {
-    'share-url': 'https://twitter.com/home?status=[[URL]]',
+    'share-url': 'https://twitter.com/intent/tweet?url=[[URL]]',
     'background-color': '#55acee',
     src: `${IMG_BASE_URL}twitter.png`,
   },
@@ -112,10 +112,13 @@ export default class MjSocialElement extends BodyComponent {
     padding: 'unit(px,%){1,4}',
     'text-padding': 'unit(px,%){1,4}',
     src: 'string',
+    srcset: 'string',
+    sizes: 'string',
     alt: 'string',
     title: 'string',
     target: 'string',
     'text-decoration': 'string',
+    'vertical-align': 'enum(top,middle,bottom)',
   }
 
   static defaultAttributes = {
@@ -129,6 +132,7 @@ export default class MjSocialElement extends BodyComponent {
     'text-padding': '4px 4px 4px 0',
     target: '_blank',
     'text-decoration': 'none',
+    'vertical-align': 'middle',
   }
 
   getStyles() {
@@ -141,6 +145,7 @@ export default class MjSocialElement extends BodyComponent {
     return {
       td: {
         padding: this.getAttribute('padding'),
+        'vertical-align': this.getAttribute('vertical-align'),
       },
       table: {
         background: backgroundColor,
@@ -185,6 +190,8 @@ export default class MjSocialElement extends BodyComponent {
     const attrs = [
       'icon-size',
       'icon-height',
+      'srcset',
+      'sizes',
       'src',
       'background-color',
     ].reduce(
@@ -204,6 +211,8 @@ export default class MjSocialElement extends BodyComponent {
   render() {
     const {
       src,
+      srcset,
+      sizes,
       href,
       'icon-size': iconSize,
       'icon-height': iconHeight,
@@ -246,6 +255,8 @@ export default class MjSocialElement extends BodyComponent {
                         src,
                         style: 'img',
                         width: parseInt(iconSize, 10),
+                        sizes,
+                        srcset,
                       })}
                     />
                   ${hasLink ? `</a>` : ''}

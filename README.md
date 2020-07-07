@@ -10,8 +10,8 @@ If you're looking for MJML 3.3.X check [this branch](https://github.com/mjmlio/m
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/mjmlio/mjml">
-    <img src="https://travis-ci.org/mjmlio/mjml.svg?branch=master" alt="travis">
+  <a href="https://github.com/mjmlio/mjml/actions">
+    <img src="https://github.com/mjmlio/mjml/workflows/Mjml%20CI/badge.svg?branch=master" alt="github actions">
   </a>
   <a href="https://www.codacy.com/app/gbadi/mjml">
     <img src="https://api.codacy.com/project/badge/grade/575339cb861f4ff4b0dbb3f9e1759c35"/>
@@ -30,7 +30,7 @@ If you're looking for MJML 3.3.X check [this branch](https://github.com/mjmlio/m
 
 # Introduction
 
-`MJML` is a markup language created by [Mailjet](https://www.mailjet.com/) and designed to reduce the pain of coding a responsive email. Its semantic syntax makes it easy and straightforward while its rich standard components library fastens your development time and lightens your email codebase. MJML’s open-source engine takes care of translating the `MJML` you wrote into responsive HTML.
+`MJML` is a markup language created by [Mailjet](https://www.mailjet.com/) and designed to reduce the pain of coding a responsive email. Its semantic syntax makes the language easy and straightforward while its rich standard components library shortens your development time and lightens your email codebase. MJML’s open-source engine takes care of translating the `MJML` you wrote into responsive HTML.
 
 <p align="center">
   <a href="https://mjml.io" target="_blank">
@@ -74,7 +74,7 @@ Don't want to install anything? Use the free online editor!
 
 MJML comes with an ecosystem of tools and plugins, check out:
 - The [MJML App](https://mjmlio.github.io/mjml-app/) (MJML is included)
-- [Visual Studio Code plugin](https://github.com/attilabuti/vscode-mjml) (MJML is included)
+- [Visual Studio Code plugin](https://github.com/mjmlio/vscode-mjml) (MJML is included)
 - [Atom plugin](https://atom.io/users/mjmlio) (MJML needs to be installed separately)
 - [Sublime Text plugin](https://packagecontrol.io/packages/MJML-syntax) (MJML needs to be installed separately)
 
@@ -136,10 +136,12 @@ option   | unit   | description  | default value
 -------------|--------|--------------|---------------
 fonts  | object | Default fonts imported in the HTML rendered by HTML | See in [index.js](https://github.com/mjmlio/mjml/blob/master/packages/mjml-core/src/index.js#L36-L44)
 keepComments | boolean | Option to keep comments in the HTML output | true
+ignoreIncludes | boolean | Option to ignore mj-includes | false
 beautify | boolean | Option to beautify the HTML output | false
 minify | boolean | Option to minify the HTML output | false
 validationLevel | string | Available values for the [validator](https://github.com/mjmlio/mjml/tree/master/packages/mjml-validator#validating-mjml): 'strict', 'soft', 'skip'  | 'soft'
 filePath | string | Path of file, used for relative paths in mj-includes | '.'
+preprocessors | array of functions | Preprocessors applied to the xml before parsing. Input must be xml, not json. Functions must be (xml: string) => string | []
 juicePreserveTags | Preserve some tags when inlining css, see [mjml-cli documentation](https://github.com/mjmlio/mjml/blob/master/packages/mjml-cli/README.md) for more info | NA
 minifyOptions | Options for html minifier, see [mjml-cli documentation](https://github.com/mjmlio/mjml/blob/master/packages/mjml-cli/README.md) for more info | NA
 mjmlConfigPath | string | The path or directory of the `.mjmlconfig` file (for custom components use) | `process.cwd()`
